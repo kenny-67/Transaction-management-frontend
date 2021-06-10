@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import Toast from "react-bootstrap/Toast";
 
+import { authFromVariants } from "../../config/animation";
+
 //Api
 import { register } from "../../network/AxiosApi";
+import { motion } from "framer-motion";
 
 import {
   Button,
@@ -131,180 +134,187 @@ function Register() {
 
       {/* main body */}
       <Col lg="6" md="8">
-        <Card className="bg-secondary shadow border-0">
-          <CardHeader className="bg-transparent pb-5">
-            <div className="text-muted text-center mt-2 mb-4">
-              <small>Sign up with</small>
-            </div>
-            {/* social media buttons for signup */}
-            <div className="text-center">
-              <Button
-                className="btn-neutral btn-icon mr-4"
-                color="default"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <span className="btn-inner--icon">
-                  <img alt="..." src={githubLogo} />
-                </span>
-                <span className="btn-inner--text">Github</span>
-              </Button>
-              <Button
-                className="btn-neutral btn-icon"
-                color="default"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <span className="btn-inner--icon">
-                  <img alt="..." src={googleLogo} />
-                </span>
-                <span className="btn-inner--text">Google</span>
-              </Button>
-            </div>
-          </CardHeader>
-          <CardBody className="px-lg-5 py-lg-5">
-            <div className="text-center text-muted mb-4">
-              <small>Or sign up with credentials</small>
-            </div>
-            <Form role="form">
-              <FormGroup>
-                <InputGroup className="input-group-alternative mb-3">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-hat-3" />
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                    placeholder="First Name"
-                    type="text"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                  />
-                </InputGroup>
-              </FormGroup>
-              <FormGroup>
-                <InputGroup className="input-group-alternative mb-3">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-hat-3" />
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                    placeholder="Last Name"
-                    type="text"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                  />
-                </InputGroup>
-              </FormGroup>
-              <FormGroup>
-                <InputGroup className="input-group-alternative mb-3">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-email-83" />
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                    placeholder="Email"
-                    type="email"
-                    autoComplete="new-email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </InputGroup>
-              </FormGroup>
-              <FormGroup>
-                <InputGroup className="input-group-alternative mb-3">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-phone" />
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                    placeholder="Phone Number"
-                    type="number"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                  />
-                </InputGroup>
-              </FormGroup>
-              <FormGroup>
-                <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-lock-circle-open" />
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                    placeholder="Password"
-                    type="password"
-                    autoComplete="new-password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </InputGroup>
-              </FormGroup>
-              <FormGroup>
-                <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-lock-circle-open" />
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                    placeholder="Confirm Password"
-                    type="password"
-                    autoComplete="new-password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                  />
-                </InputGroup>
-              </FormGroup>
-              {error ? (
-                <div className="text-muted font-italic">
-                  <small>
-                    error:{" "}
-                    <span className="text-red font-weight-700">{error}</span>
-                  </small>
-                </div>
-              ) : null}
-              <Row className="my-4">
-                <Col xs="12">
-                  <div className="custom-control custom-control-alternative custom-checkbox">
-                    <input
-                      className="custom-control-input"
-                      id="customCheckRegister"
-                      type="checkbox"
-                      checked={checkbox}
-                      onChange={() => setCheckbox(!checkbox)}
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="customCheckRegister"
-                    >
-                      <span className="text-muted">
-                        I agree with the{" "}
-                        <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                          Privacy Policy
-                        </a>
-                      </span>
-                    </label>
-                  </div>
-                </Col>
-              </Row>
+        <motion.div
+          variants={authFromVariants}
+          initial="hidden"
+          animate="enter"
+          exit="exit"
+        >
+          <Card className="bg-secondary shadow border-0">
+            <CardHeader className="bg-transparent pb-5">
+              <div className="text-muted text-center mt-2 mb-4">
+                <small>Sign up with</small>
+              </div>
+              {/* social media buttons for signup */}
               <div className="text-center">
                 <Button
-                  onClick={registerUser}
-                  className="mt-4"
-                  color="primary"
-                  type="button"
+                  className="btn-neutral btn-icon mr-4"
+                  color="default"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
                 >
-                  Create account
+                  <span className="btn-inner--icon">
+                    <img alt="..." src={githubLogo} />
+                  </span>
+                  <span className="btn-inner--text">Github</span>
+                </Button>
+                <Button
+                  className="btn-neutral btn-icon"
+                  color="default"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <span className="btn-inner--icon">
+                    <img alt="..." src={googleLogo} />
+                  </span>
+                  <span className="btn-inner--text">Google</span>
                 </Button>
               </div>
-            </Form>
-          </CardBody>
-        </Card>
+            </CardHeader>
+            <CardBody className="px-lg-5 py-lg-5">
+              <div className="text-center text-muted mb-4">
+                <small>Or sign up with credentials</small>
+              </div>
+              <Form role="form">
+                <FormGroup>
+                  <InputGroup className="input-group-alternative mb-3">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-hat-3" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="First Name"
+                      type="text"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                    />
+                  </InputGroup>
+                </FormGroup>
+                <FormGroup>
+                  <InputGroup className="input-group-alternative mb-3">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-hat-3" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="Last Name"
+                      type="text"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                    />
+                  </InputGroup>
+                </FormGroup>
+                <FormGroup>
+                  <InputGroup className="input-group-alternative mb-3">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-email-83" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="Email"
+                      type="email"
+                      autoComplete="new-email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </InputGroup>
+                </FormGroup>
+                <FormGroup>
+                  <InputGroup className="input-group-alternative mb-3">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-phone" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="Phone Number"
+                      type="number"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                    />
+                  </InputGroup>
+                </FormGroup>
+                <FormGroup>
+                  <InputGroup className="input-group-alternative">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-lock-circle-open" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="Password"
+                      type="password"
+                      autoComplete="new-password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </InputGroup>
+                </FormGroup>
+                <FormGroup>
+                  <InputGroup className="input-group-alternative">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-lock-circle-open" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="Confirm Password"
+                      type="password"
+                      autoComplete="new-password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                  </InputGroup>
+                </FormGroup>
+                {error ? (
+                  <div className="text-muted font-italic">
+                    <small>
+                      error:{" "}
+                      <span className="text-red font-weight-700">{error}</span>
+                    </small>
+                  </div>
+                ) : null}
+                <Row className="my-4">
+                  <Col xs="12">
+                    <div className="custom-control custom-control-alternative custom-checkbox">
+                      <input
+                        className="custom-control-input"
+                        id="customCheckRegister"
+                        type="checkbox"
+                        checked={checkbox}
+                        onChange={() => setCheckbox(!checkbox)}
+                      />
+                      <label
+                        className="custom-control-label"
+                        htmlFor="customCheckRegister"
+                      >
+                        <span className="text-muted">
+                          I agree with the{" "}
+                          <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                            Privacy Policy
+                          </a>
+                        </span>
+                      </label>
+                    </div>
+                  </Col>
+                </Row>
+                <div className="text-center">
+                  <Button
+                    onClick={registerUser}
+                    className="mt-4"
+                    color="primary"
+                    type="button"
+                  >
+                    Create account
+                  </Button>
+                </div>
+              </Form>
+            </CardBody>
+          </Card>
+        </motion.div>
       </Col>
     </>
   );

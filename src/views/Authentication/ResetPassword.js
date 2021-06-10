@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { forgotPassword } from "../../network/AxiosApi";
+import { motion } from "framer-motion";
+import { authFromVariants } from "../../config/animation";
 
 // reactstrap components
 import {
@@ -83,46 +85,53 @@ function ResetPassword(props) {
         </Toast>
       </div>
       <Col lg="5" md="7">
-        <Card className="bg-secondary shadow border-0">
-          <CardBody className="px-lg-5 py-lg-5">
-            <Form role="form">
-              <FormGroup className="mb-3">
-                <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-email-83" />
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                    placeholder="Email"
-                    type="email"
-                    autoComplete="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </InputGroup>
-              </FormGroup>
-              {error ? (
-                <div className="text-muted font-italic">
-                  <small>
-                    error:{" "}
-                    <span className="text-red font-weight-700">{error}</span>
-                  </small>
+        <motion.div
+          variants={authFromVariants}
+          initial="hidden"
+          animate="enter"
+          exit="exit"
+        >
+          <Card className="bg-secondary shadow border-0">
+            <CardBody className="px-lg-5 py-lg-5">
+              <Form role="form">
+                <FormGroup className="mb-3">
+                  <InputGroup className="input-group-alternative">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-email-83" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="Email"
+                      type="email"
+                      autoComplete="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </InputGroup>
+                </FormGroup>
+                {error ? (
+                  <div className="text-muted font-italic">
+                    <small>
+                      error:{" "}
+                      <span className="text-red font-weight-700">{error}</span>
+                    </small>
+                  </div>
+                ) : null}
+                <div className="text-center">
+                  <Button
+                    className="my-4"
+                    color="primary"
+                    type="button"
+                    onClick={sendEmail}
+                  >
+                    Reset Password
+                  </Button>
                 </div>
-              ) : null}
-              <div className="text-center">
-                <Button
-                  className="my-4"
-                  color="primary"
-                  type="button"
-                  onClick={sendEmail}
-                >
-                  Reset Password
-                </Button>
-              </div>
-            </Form>
-          </CardBody>
-        </Card>
+              </Form>
+            </CardBody>
+          </Card>
+        </motion.div>
       </Col>
     </>
   );

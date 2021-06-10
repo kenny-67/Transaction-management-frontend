@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 
 // reactstrap components
 import { Container, Row, Col } from "reactstrap";
@@ -43,11 +44,17 @@ class AuthPagesLayout extends Component {
               <div className="header-body text-center mb-7">
                 <Row className="justify-content-center">
                   <Col lg="5" md="6">
-                    <h1 className="text-white">Welcome!</h1>
-                    <p className="text-lead text-light">
-                      Some brief description about the app, to be replaced when
-                      i come up with an app name
-                    </p>
+                    <motion.div
+                      initial={{ y: -100 }}
+                      animate={{ y: 0 }}
+                      transition={{ type: "spring", duration: 1, bounce: 0.7 }}
+                    >
+                      <h1 className="text-white">Welcome!</h1>
+                      <p className="text-lead text-light">
+                        Some brief description about the app, to be replaced
+                        when i come up with an app name
+                      </p>
+                    </motion.div>
                   </Col>
                 </Row>
               </div>
@@ -71,10 +78,15 @@ class AuthPagesLayout extends Component {
           {/* Page content */}
           <Container className="mt--8 pb-5">
             <Row className="justify-content-center">
-              <Switch>
-                {this.getRoutes(routes)}
-                <Redirect from="*" to="/auth/login" />
-              </Switch>
+              <AnimatePresence exitBeforeEnter>
+                <Switch
+                  location={this.props.location}
+                  key={this.props.location.key}
+                >
+                  {this.getRoutes(routes)}
+                  <Redirect from="*" to="/auth/login" />
+                </Switch>
+              </AnimatePresence>
             </Row>
           </Container>
         </div>

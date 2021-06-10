@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { confirmRegister } from "../../network/AxiosApi";
 import { Card, CardBody, Col } from "reactstrap";
+import { motion } from "framer-motion";
+import { authFromVariants } from "../../config/animation";
 
 const ConfirmEmail = (props) => {
   const { history } = props;
@@ -31,17 +33,24 @@ const ConfirmEmail = (props) => {
   return (
     <>
       <Col lg="6" md="8">
-        <Card className="bg-secondary shadow border-0">
-          <CardBody className="px-lg-5 py-lg-5">
-            <div className="text-center mb-4">
-              <h1>
-                {valid
-                  ? "Email confirmed! You will be redirected to login..."
-                  : "Something went wrong!"}
-              </h1>
-            </div>
-          </CardBody>
-        </Card>
+        <motion.div
+          variants={authFromVariants}
+          initial="hidden"
+          animate="enter"
+          exit="exit"
+        >
+          <Card className="bg-secondary shadow border-0">
+            <CardBody className="px-lg-5 py-lg-5">
+              <div className="text-center mb-4">
+                <h1>
+                  {valid
+                    ? "Email confirmed! You will be redirected to login..."
+                    : "Something went wrong!"}
+                </h1>
+              </div>
+            </CardBody>
+          </Card>
+        </motion.div>
       </Col>
     </>
   );
