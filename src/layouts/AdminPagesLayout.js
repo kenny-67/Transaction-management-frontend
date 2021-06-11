@@ -4,7 +4,9 @@ import { Route, Switch, Redirect } from "react-router-dom";
 //components
 import AdminNavbar from "../components/Navbars/AdminNavbar";
 import Sidebar from "../components/Sidebar/Sidebar";
-import AdminFooter from "../components/Footers/AuthFooter";
+import AdminFooter from "../components/Footers/AdminFooter";
+import { AnimatePresence, motion } from "framer-motion";
+import AdminHeader from "../components/Headers/AdminHeader";
 
 // reactstrap components
 import { Container } from "reactstrap";
@@ -60,11 +62,17 @@ class AdminPageLayout extends React.Component {
             {...this.props}
             brandText={this.getBrandText(this.props.location.pathname)}
           />
+          <AdminHeader />
+          <AnimatePresence exitBeforeEnter>
+            <Switch
+              location={this.props.location}
+              key={this.props.location.key}
+            >
+              {this.getRoutes(routes)}
+              <Redirect from="*" to="/admin/index" />
+            </Switch>
+          </AnimatePresence>
 
-          <Switch>
-            {this.getRoutes(routes)}
-            <Redirect from="*" to="/admin/index" />
-          </Switch>
           <Container fluid>
             <AdminFooter />
           </Container>

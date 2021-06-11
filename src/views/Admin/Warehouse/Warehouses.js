@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import AdminHeader from "../../../components/Headers/AdminHeader";
 import ItermTable from "../../../components/Tables/ItermTable";
 
 //reactstrap import
@@ -7,6 +6,9 @@ import { Container, Row } from "reactstrap";
 
 //network
 import { getAllWarehouse } from "../../../network/AxiosApi";
+
+import { motion } from "framer-motion";
+import { genericAdminVariants } from "../../../config/animation";
 
 function Warehouses() {
   const [Warehouse, setWarehouse] = useState([]);
@@ -26,15 +28,21 @@ function Warehouses() {
   };
   return (
     <>
-      <AdminHeader />
       <Container className="mt--7" fluid>
-        <Row>
-          <ItermTable
-            tableData={tableData}
-            buttonName="Create Warehouse"
-            path="/admin/create-warehouse"
-          />
-        </Row>
+        <motion.div
+          variants={genericAdminVariants}
+          initial="hidden"
+          animate="enter"
+          exit="exit"
+        >
+          <Row>
+            <ItermTable
+              tableData={tableData}
+              buttonName="Create Warehouse"
+              path="/admin/create-warehouse"
+            />
+          </Row>
+        </motion.div>
       </Container>
     </>
   );

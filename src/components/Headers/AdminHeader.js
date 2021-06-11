@@ -1,4 +1,6 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { AdminPageLayoutVariants } from "../../config/animation";
 
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
@@ -7,7 +9,12 @@ function AdminHeader() {
   return (
     <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
       <Container fluid>
-        <div className="header-body">
+        <motion.div
+          className="header-body"
+          variants={AdminPageLayoutVariants}
+          initial="hidden"
+          animate="enter"
+        >
           {/* Card stats */}
           <Row>
             <Col lg="6" xl="3">
@@ -123,7 +130,7 @@ function AdminHeader() {
               </Card>
             </Col>
           </Row>
-        </div>
+        </motion.div>
       </Container>
     </div>
   );

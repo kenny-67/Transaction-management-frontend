@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import AdminHeader from "../../../components/Headers/AdminHeader";
 import ItermTable from "../../../components/Tables/ItermTable";
 
 //reactstrap import
 import { Container, Row } from "reactstrap";
+
+import { motion } from "framer-motion";
+import { genericAdminVariants } from "../../../config/animation";
 
 //network
 import { getAllStore } from "../../../network/AxiosApi";
@@ -26,15 +28,21 @@ function Employees() {
   };
   return (
     <>
-      <AdminHeader />
       <Container className="mt--7" fluid>
-        <Row>
-          <ItermTable
-            tableData={tableData}
-            buttonName="Add Employee"
-            path="/admin/add-employee"
-          />
-        </Row>
+        <motion.div
+          variants={genericAdminVariants}
+          initial="hidden"
+          animate="enter"
+          exit="exit"
+        >
+          <Row>
+            <ItermTable
+              tableData={tableData}
+              buttonName="Add Employee"
+              path="/admin/add-employee"
+            />
+          </Row>
+        </motion.div>
       </Container>
     </>
   );

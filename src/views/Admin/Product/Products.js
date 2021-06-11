@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import AdminHeader from "../../../components/Headers/AdminHeader";
 import ItermTable from "../../../components/Tables/ItermTable";
+import { motion } from "framer-motion";
+import {genericAdminVariants} from "../../../config/animation"
 
 //network
 import { getAllProduct } from "../../../network/AxiosApi";
@@ -35,15 +36,21 @@ function Products() {
 
   return (
     <>
-      <AdminHeader />
       <Container className="mt--7" fluid>
-        <Row>
-          <ItermTable
-            tableData={tableData}
-            buttonName="Add Product"
-            path="/admin/add-product"
-          />
-        </Row>
+        <motion.div
+          variants={genericAdminVariants}
+          initial="hidden"
+          animate="enter"
+          exit="exit"
+        >
+          <Row>
+            <ItermTable
+              tableData={tableData}
+              buttonName="Add Product"
+              path="/admin/add-product"
+            />
+          </Row>
+        </motion.div>
       </Container>
     </>
   );
