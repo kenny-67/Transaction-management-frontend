@@ -226,7 +226,7 @@ function Register() {
                   <InputGroup className="input-group-alternative mb-3">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
-                        <i className="ni ni-phone" />
+                        <i className="fas fa-phone" />
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input

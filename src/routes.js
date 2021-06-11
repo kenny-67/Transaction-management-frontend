@@ -67,11 +67,10 @@ const routes = [
     layout: "/auth",
     api: true,
   },
-
   {
     path: "/products",
     name: "Products",
-    icon: "ni ni-folder-17 text-pink",
+    icon: "fas fa-chart-line",
     component: Products,
     layout: "/admin",
     api: false,
@@ -87,7 +86,7 @@ const routes = [
   {
     path: "/stores",
     name: "stores",
-    icon: "ni ni-tv-2 text-primary",
+    icon: "fas fa-store",
     component: Stores,
     layout: "/admin",
     api: false,
@@ -95,7 +94,7 @@ const routes = [
   {
     path: "/warehouses",
     name: "warehouse",
-    icon: "ni ni-tv-2 text-primary",
+    icon: "fas fa-house-user",
     component: Warehouses,
     layout: "/admin",
     api: false,
