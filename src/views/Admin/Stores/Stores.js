@@ -40,6 +40,7 @@ function Stores() {
               tableData={tableData}
               buttonName="Create Store"
               path="/admin/add-store"
+              hasButton
             />
           </Row>
         </motion.div>

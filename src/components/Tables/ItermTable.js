@@ -1,35 +1,50 @@
 import React from "react";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //reactstrap import
 import { Card, CardHeader, Table, Button, Col } from "reactstrap";
 
 const ProductRow = (props) => {
-  const { productObj } = props;
+  const { productObj = {}, hasImage = false } = props;
+  const propertyValues = Object.keys(productObj);
   return (
     <>
-      {Object.values(productObj).map((product, key) => (
-        <td key={key}>{product}</td>
-      ))}
+      {propertyValues.map((product, key) => {
+        console.log(productObj[product]);
+        if (hasImage && key == 0) {
+          return (
+            <td key={key}>
+              <img
+                src={productObj[product]}
+                alt="product-image"
+                width="50px"
+                style={{ borderRadius: 50 }}
+              />
+            </td>
+          );
+        }
+        if (product) return <td key={key}>{productObj[product]}</td>;
+      })}
     </>
   );
 };
 
 function ItermTable(props) {
-  const { tableData, buttonName, path } = props;
-  const history = useHistory();
+  const { hasImage, tableData, buttonName = "", path = "", hasButton } = props;
   return (
     <div className="col">
       <Card className="shadow">
         <CardHeader className="border-0">
           <h3 className="mb-0">{tableData.tableName}</h3>
-          <Col className="text-right" xs="14" style={{ marginTop: "-30px" }}>
-            <Link to={path}>
-              <Button color="primary" size="sm">
-                {buttonName}
-              </Button>
-            </Link>
-          </Col>
+          {hasButton && (
+            <Col className="text-right" xs="14" style={{ marginTop: "-30px" }}>
+              <Link to={path}>
+                <Button color="primary" size="sm">
+                  {buttonName}
+                </Button>
+              </Link>
+            </Col>
+          )}
         </CardHeader>
         <Table className="align-items-center table-flush" responsive>
           <thead className="thead-light">
@@ -45,7 +60,7 @@ function ItermTable(props) {
             <tbody>
               {tableData.product.map((productObj, key) => (
                 <tr key={key}>
-                  <ProductRow productObj={productObj} />
+                  <ProductRow productObj={productObj} hasImage={hasImage} />
                 </tr>
               ))}
             </tbody>

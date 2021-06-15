@@ -5,7 +5,15 @@ import { motion } from "framer-motion";
 import { adminFooterVariants } from "../../config/animation";
 
 // reactstrap components
-import { Row, Col, Nav, NavItem, NavLink } from "reactstrap";
+import {
+  Row,
+  Col,
+  Nav,
+  NavItem,
+  NavLink,
+  InputGroupAddon,
+  InputGroupText,
+} from "reactstrap";
 
 function AdminFooter() {
   return (
@@ -20,57 +28,35 @@ function AdminFooter() {
         <Row className="align-items-center justify-content-xl-between">
           <Col xl="6">
             <div className="copyright text-center text-xl-left text-muted">
-              © 2018{" "}
-              <a
-                className="font-weight-bold ml-1"
-                href="https://www.creative-tim.com?ref=adr-admin-footer"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Creative Tim
+              © 2021{" "}
+              <a className="font-weight-bold ml-1" href="/" target="_blank">
+                KenTech
               </a>
             </div>
           </Col>
 
           <Col xl="6">
             <Nav className="nav-footer justify-content-center justify-content-xl-end">
-              <NavItem>
-                <NavLink
-                  href="https://www.creative-tim.com?ref=adr-admin-footer"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  Creative Tim
+              <NavItem style={{ display: "flex", alignItems: "center" }}>
+                <i className="fab fa-github" />
+
+                <NavLink href="https://github.com/kenny-67" target="_blank">
+                  Github
                 </NavLink>
               </NavItem>
-
-              <NavItem>
+              <NavItem style={{ display: "flex", alignItems: "center" }}>
+                <i className="fab fa-linkedin-in" />
                 <NavLink
-                  href="https://www.creative-tim.com/presentation?ref=adr-admin-footer"
-                  rel="noopener noreferrer"
+                  href="https://linkedin.com/in/kenneth-nnopu-b2539318b"
                   target="_blank"
                 >
-                  About Us
+                  Linkedin
                 </NavLink>
               </NavItem>
-
-              <NavItem>
-                <NavLink
-                  href="http://blog.creative-tim.com?ref=adr-admin-footer"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  Blog
-                </NavLink>
-              </NavItem>
-
-              <NavItem>
-                <NavLink
-                  href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md?ref=adr-admin-footer"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  MIT License
+              <NavItem style={{ display: "flex", alignItems: "center" }}>
+                <i className="fab fa-twitter" />
+                <NavLink href="twitter.com/NnopuK?s=03" target="_blank">
+                  Twitter
                 </NavLink>
               </NavItem>
             </Nav>

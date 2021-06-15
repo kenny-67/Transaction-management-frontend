@@ -5,7 +5,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import AdminNavbar from "../components/Navbars/AdminNavbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 import AdminFooter from "../components/Footers/AdminFooter";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import AdminHeader from "../components/Headers/AdminHeader";
 
 // reactstrap components

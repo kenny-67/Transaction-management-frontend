@@ -40,6 +40,7 @@ function Warehouses() {
               tableData={tableData}
               buttonName="Create Warehouse"
               path="/admin/create-warehouse"
+              hasButton
             />
           </Row>
         </motion.div>

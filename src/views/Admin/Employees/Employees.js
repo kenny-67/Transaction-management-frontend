@@ -40,6 +40,7 @@ function Employees() {
               tableData={tableData}
               buttonName="Add Employee"
               path="/admin/add-employee"
+              hasButton
             />
           </Row>
         </motion.div>

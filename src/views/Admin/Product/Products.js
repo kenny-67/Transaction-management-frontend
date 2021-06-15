@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ItermTable from "../../../components/Tables/ItermTable";
 import { motion } from "framer-motion";
-import {genericAdminVariants} from "../../../config/animation"
+import { genericAdminVariants } from "../../../config/animation";
 
 //network
 import { getAllProduct } from "../../../network/AxiosApi";
@@ -48,6 +48,7 @@ function Products() {
               tableData={tableData}
               buttonName="Add Product"
               path="/admin/add-product"
+              hasButton
             />
           </Row>
         </motion.div>
