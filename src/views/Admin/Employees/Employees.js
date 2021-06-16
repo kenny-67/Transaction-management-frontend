@@ -8,15 +8,17 @@ import { motion } from "framer-motion";
 import { genericAdminVariants } from "../../../config/animation";
 
 //network
-import { getAllStore } from "../../../network/AxiosApi";
+import { getAllEmployees } from "../../../network/AxiosApi";
 
 function Employees() {
   const [Employees, setEmployees] = useState([]);
 
   useEffect(() => {
     const getProductFunction = async () => {
-      const response = await getAllStore();
+      const response = await getAllEmployees();
       const { data } = response;
+    console.log(response)
+
       setEmployees(data.employees);
     };
     getProductFunction();
@@ -24,7 +26,7 @@ function Employees() {
   const tableData = {
     tableName: "Employees tables",
     product: Employees,
-    tableHead: ["Store Id", "Store Name", "Address"],
+    tableHead: ["Employee Id", "First Name", "Last Name", "Email", "Phone Number", "Employee Type","Branch Id"],
   };
   return (
     <>

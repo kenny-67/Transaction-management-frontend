@@ -59,3 +59,6 @@ export const getStore = async (id) => await instance.get(`/store/${id}`);
 export const getAllWarehouse = async () => await instance.get(`/warehouse`);
 export const getWarehouse = async (id) =>
   await instance.get(`/warehouse/${id}`);
+
+//Employee
+export const getAllEmployees = async () => await instance.get(`/employee`);

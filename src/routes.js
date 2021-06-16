@@ -9,6 +9,7 @@ import Products from "./views/Admin/Product/Products";
 import Stores from "./views/Admin/Stores/Stores";
 import Warehouses from "./views/Admin/Warehouse/Warehouses";
 import AddProduct from "./views/Admin/Product/AddProduct";
+import Employee from "./views/Admin/Employees/Employees"
 
 const routes = [
   {
@@ -79,7 +80,7 @@ const routes = [
     path: "/employees",
     name: "Employees",
     icon: "ni ni-single-02 text-yellow",
-    component: Dashboard,
+    component: Employee,
     layout: "/admin",
     api: false,
   },
