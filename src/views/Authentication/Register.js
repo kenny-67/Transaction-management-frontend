@@ -63,14 +63,14 @@ function Register() {
       setError("Passwords do not match");
       return;
     }
-    console.log(process.env.API_BASE_URL);
-    const response = await register(
+    const registerRequestObject = {
       firstName,
       lastName,
       email,
       password,
-      phoneNumber
-    );
+      phoneNumber,
+    };
+    const response = await register(registerRequestObject);
     const { data } = response;
     if (!data.success) {
       setError(data.msg);

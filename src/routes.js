@@ -9,7 +9,9 @@ import Products from "./views/Admin/Product/Products";
 import Stores from "./views/Admin/Stores/Stores";
 import Warehouses from "./views/Admin/Warehouse/Warehouses";
 import AddProduct from "./views/Admin/Product/AddProduct";
-import Employee from "./views/Admin/Employees/Employees"
+import Employee from "./views/Admin/Employees/Employees";
+import AddEmployee from "./views/Admin/Employees/AddEmployee";
+import Orders from "./views/Generic/Orders";
 
 const routes = [
   {
@@ -107,6 +109,46 @@ const routes = [
     component: AddProduct,
     layout: "/admin",
     api: true,
+  },
+  {
+    path: "/add-employee",
+    name: "Add Employee",
+    icon: "ni ni-tv-2 text-primary",
+    component: AddEmployee,
+    layout: "/admin",
+    api: true,
+  },
+  {
+    path: "/orders",
+    name: "Orders",
+    icon: "ni ni-tv-2 text-primary",
+    component: Orders,
+    layout: "/admin",
+    api: false,
+  },
+  {
+    path: "/orders",
+    name: "Orders",
+    icon: "ni ni-tv-2 text-primary",
+    component: Orders,
+    layout: "/employee",
+    api: false,
+  },
+  {
+    path: "/products",
+    name: "Products",
+    icon: "fas fa-chart-line",
+    component: Products,
+    layout: "/employee",
+    api: false,
+  },
+  {
+    path: "/index",
+    name: "Dashboard",
+    icon: "ni ni-tv-2 text-primary",
+    component: Dashboard,
+    layout: "/employee",
+    api: false,
   },
 ];
 export default routes;

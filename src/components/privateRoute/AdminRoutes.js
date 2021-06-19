@@ -2,12 +2,17 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
 function AdminRoutes({ component: Component, ...rest }) {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = localStorage.getItem("token");
+  console.log(user.isAdmin);
   return (
     <Route
       {...rest}
       render={(props) =>
-        localStorage.getItem("token") && localStorage.getItem("user") ? (
+        token && user.isAdmin ? (
           <Component {...props} />
+        ) : token && !user.isAdmin ? (
+          <Redirect to="/employee" />
         ) : (
           <Redirect to="/auth/login" />
         )

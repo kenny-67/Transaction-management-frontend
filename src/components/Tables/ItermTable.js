@@ -10,7 +10,6 @@ const ProductRow = (props) => {
   return (
     <>
       {propertyValues.map((product, key) => {
-        console.log(productObj[product]);
         if (hasImage && key == 0) {
           return (
             <td key={key}>

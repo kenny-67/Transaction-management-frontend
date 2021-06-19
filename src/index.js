@@ -6,10 +6,12 @@ import "./index.css";
 //routes
 import AuthRoute from "./components/privateRoute/AuthRoute";
 import AdminRoutes from "./components/privateRoute/AdminRoutes";
+import EmployeeRoutes from "./components/privateRoute/EmployeeRoutes";
 
 //layouts
 import AuthPagesLayout from "./layouts/AuthPagesLayout";
 import AdminPageLayout from "./layouts/AdminPagesLayout";
+import EmployeePageLayout from "./layouts/EmployeePageLayout";
 
 import reportWebVitals from "./reportWebVitals";
 import "./assets/plugins/nucleo/css/nucleo.css";
@@ -21,7 +23,8 @@ ReactDOM.render(
     <Switch>
       <AdminRoutes path="/admin" component={AdminPageLayout} />
       <AuthRoute path="/auth" component={AuthPagesLayout} />
-      <Redirect from="/" to="/admin" />
+      <EmployeeRoutes path="/employee" component={EmployeePageLayout} />
+      <Redirect from="/" to="/admin/index" />
     </Switch>
   </BrowserRouter>,
 

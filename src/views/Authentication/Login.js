@@ -41,7 +41,11 @@ function Login(props) {
       setError("");
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
-      props.history.push("/");
+      if (data.user.isAdmin) {
+        props.history.push("/admin");
+      } else {
+        props.history.push("/employee");
+      }
     } else {
       setPassword("");
       setError(data.msg);

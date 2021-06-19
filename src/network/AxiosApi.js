@@ -11,20 +11,8 @@ instance.interceptors.request.use(async (config) => {
   return config;
 });
 
-export const register = async (
-  firstName,
-  lastName,
-  email,
-  password,
-  phoneNumber
-) =>
-  await instance.post("users/register", {
-    firstName,
-    lastName,
-    email,
-    password,
-    phoneNumber,
-  });
+export const register = async (data) =>
+  await instance.post("users/register", data);
 
 // auth endpoints
 export const login = async (email, password) =>
