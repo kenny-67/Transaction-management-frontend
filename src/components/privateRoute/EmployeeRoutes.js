@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import NotFoundPage from "../Error/NotFoundPage";
 
 function EmployeeRoutes({ component: Component, ...rest }) {
   const user = JSON.parse(localStorage.getItem("user"));

@@ -14,7 +14,7 @@ import {
   Col,
 } from "reactstrap";
 import { motion } from "framer-motion";
-import {genericAdminVariants} from "../../../config/animation"
+import { genericAdminVariants } from "../../../config/animation";
 import { createProduct, getAllWarehouse } from "../../../network/AxiosApi";
 
 function AddProduct() {
@@ -46,6 +46,7 @@ function AddProduct() {
       [name]: data,
     }));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let warehouseId;
@@ -222,6 +223,7 @@ function AddProduct() {
                               name="originalPrice"
                               value={FormInfo.originalPrice}
                               onChange={handleFormChange}
+                            
                             />
                           </FormGroup>
                         </Col>

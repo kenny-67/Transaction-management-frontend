@@ -12,6 +12,7 @@ import EmployeeRoutes from "./components/privateRoute/EmployeeRoutes";
 import AuthPagesLayout from "./layouts/AuthPagesLayout";
 import AdminPageLayout from "./layouts/AdminPagesLayout";
 import EmployeePageLayout from "./layouts/EmployeePageLayout";
+import NotFoundPage from "./components/Error/NotFoundPage";
 
 import reportWebVitals from "./reportWebVitals";
 import "./assets/plugins/nucleo/css/nucleo.css";
@@ -24,7 +25,7 @@ ReactDOM.render(
       <AdminRoutes path="/admin" component={AdminPageLayout} />
       <AuthRoute path="/auth" component={AuthPagesLayout} />
       <EmployeeRoutes path="/employee" component={EmployeePageLayout} />
-      <Redirect from="/" to="/admin/index" />
+      <NotFoundPage />
     </Switch>
   </BrowserRouter>,
 

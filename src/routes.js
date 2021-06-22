@@ -12,6 +12,7 @@ import AddProduct from "./views/Admin/Product/AddProduct";
 import Employee from "./views/Admin/Employees/Employees";
 import AddEmployee from "./views/Admin/Employees/AddEmployee";
 import Orders from "./views/Generic/Orders";
+import CreateOrder from "./views/Generic/CreateOrder";
 
 const routes = [
   {
@@ -127,6 +128,22 @@ const routes = [
     api: false,
   },
   {
+    path: "/create-order",
+    name: "Create Order",
+    icon: "ni ni-tv-2 text-primary",
+    component: CreateOrder,
+    layout: "/admin",
+    api: true,
+  },
+  {
+    path: "/index",
+    name: "Dashboard",
+    icon: "ni ni-tv-2 text-primary",
+    component: Dashboard,
+    layout: "/employee",
+    api: false,
+  },
+  {
     path: "/orders",
     name: "Orders",
     icon: "ni ni-tv-2 text-primary",
@@ -143,12 +160,12 @@ const routes = [
     api: false,
   },
   {
-    path: "/index",
-    name: "Dashboard",
+    path: "/create-order",
+    name: "Create Order",
     icon: "ni ni-tv-2 text-primary",
-    component: Dashboard,
+    component: CreateOrder,
     layout: "/employee",
-    api: false,
+    api: true,
   },
 ];
 export default routes;

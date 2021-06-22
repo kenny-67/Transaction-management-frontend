@@ -12,7 +12,7 @@ function AdminRoutes({ component: Component, ...rest }) {
         token && user.isAdmin ? (
           <Component {...props} />
         ) : token && !user.isAdmin ? (
-          <Redirect to="/employee" />
+          <Redirect to="/employee/index" />
         ) : (
           <Redirect to="/auth/login" />
         )

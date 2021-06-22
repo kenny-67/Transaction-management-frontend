@@ -57,23 +57,43 @@ function Sidebar(props) {
     setCollapseOpen(!collapseOpen);
   };
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
   // creates the links that appear in the left menu / Sidebar
   const createLinks = (routes) => {
-    return routes.map((prop, key) => {
-      return prop.layout === "/admin" && !prop.api ? (
-        <NavItem key={key}>
-          <NavLink
-            to={prop.layout + prop.path}
-            tag={NavLinkRRD}
-            onClick={closeCollapse}
-            activeClassName="active"
-          >
-            <i className={prop.icon} />
-            {prop.name}
-          </NavLink>
-        </NavItem>
-      ) : null;
-    });
+    if (user.isAdmin) {
+      return routes.map((prop, key) => {
+        return prop.layout === "/admin" && !prop.api ? (
+          <NavItem key={key}>
+            <NavLink
+              to={prop.layout + prop.path}
+              tag={NavLinkRRD}
+              onClick={closeCollapse}
+              activeClassName="active"
+            >
+              <i className={prop.icon} />
+              {prop.name}
+            </NavLink>
+          </NavItem>
+        ) : null;
+      });
+    } else {
+      return routes.map((prop, key) => {
+        return prop.layout === "/employee" && !prop.api ? (
+          <NavItem key={key}>
+            <NavLink
+              to={prop.layout + prop.path}
+              tag={NavLinkRRD}
+              onClick={closeCollapse}
+              activeClassName="active"
+            >
+              <i className={prop.icon} />
+              {prop.name}
+            </NavLink>
+          </NavItem>
+        ) : null;
+      });
+    }
   };
 
   // const createApiLinks = (routes) => {

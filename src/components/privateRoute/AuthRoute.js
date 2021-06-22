@@ -13,7 +13,7 @@ function AuthRoute(props) {
           </>
         ) : (
           <>
-            <Redirect to="/admin" />
+            <Redirect to="/admin/index" />
           </>
         )
       }

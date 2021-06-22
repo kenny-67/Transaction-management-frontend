@@ -14,6 +14,7 @@ import { Container } from "reactstrap";
 import logo from "../assets/img/brand/argon-react.png";
 
 import routes from "../routes.js";
+import NotFoundPage from "../components/Error/NotFoundPage";
 
 class EmployeePageLayout extends React.Component {
   getRoutes = (routes) => {
@@ -63,16 +64,15 @@ class EmployeePageLayout extends React.Component {
             brandText={this.getBrandText(this.props.location.pathname)}
           />
           <AdminHeader />
-          testing
-          {/* <AnimatePresence exitBeforeEnter>
+          <AnimatePresence exitBeforeEnter>
             <Switch
               location={this.props.location}
               key={this.props.location.key}
             >
               {this.getRoutes(routes)}
-              <Redirect from="*" to="/auth/login" />
+              <Redirect from="*" to="/employee/index" />
             </Switch>
-          </AnimatePresence> */}
+          </AnimatePresence>
           <Container fluid>
             <AdminFooter />
           </Container>
