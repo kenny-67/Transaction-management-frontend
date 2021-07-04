@@ -27,16 +27,21 @@ function AdminNavbar(props) {
   // let username = JSON.parse(localStorage.getItem("user")).name;
 
   const handleLogOut = async () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      const response = await logOut(token);
-      const { data } = response;
-      if (data.success) {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        props.history.push("/auth/login");
-      }
-    }
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    props.history.push("/auth/login");
+    // console.log("inside logout route");
+    // const token = localStorage.getItem("token");
+    // if (token) {
+    //   const response = await logOut(token);
+    //   const { data } = response;
+    //   if (data.success) {
+    //     console.log("removing token");
+    //     localStorage.removeItem("token");
+    //     localStorage.removeItem("user");
+    //     props.history.push("/auth/login");
+    //   }
+    // }
   };
   return (
     <>

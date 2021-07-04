@@ -17,7 +17,7 @@ import {
 } from "reactstrap";
 import { motion } from "framer-motion";
 import { genericAdminVariants } from "../../config/animation";
-import { createProduct, getAllProduct } from "../../network/AxiosApi";
+import { createOrder, getAllProduct } from "../../network/AxiosApi";
 import SelectedProducts from "./SelectedProducts";
 
 const customStyles = {
@@ -90,7 +90,23 @@ function CreateOrder() {
     }
   };
 
-  console.log(OrderList);
+  const handleOrder = async () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const redirectUrl = user.isAdmin
+      ? "http://localhost:3000/admin/orders"
+      : "http://localhost:3000/employee/orders";
+    console.log(redirectUrl);
+    const { data } = await createOrder(OrderList, Total, redirectUrl);
+
+    console.log(data);
+
+    if (!data.success) {
+      alert(data.message.message);
+    }
+
+    const redirectLink = data.message.data.link;
+    window.location.href = redirectLink;
+  };
 
   return (
     <>
@@ -203,15 +219,15 @@ function CreateOrder() {
                                   </tr>
                                 ))}
                               </tbody>
-                              <div
-                                style={{
-                                  marginLeft: "24px",
-                                  marginTop: "50px",
-                                }}
-                              >
-                                Total: {Total}
-                              </div>
                             </Table>
+                            <div
+                              style={{
+                                marginLeft: "24px",
+                                marginTop: "50px",
+                              }}
+                            >
+                              Total: {Total}
+                            </div>
                           </Card>
                           <Button
                             style={{
@@ -220,7 +236,7 @@ function CreateOrder() {
                               marginLeft: "40%",
                             }}
                             color="info"
-                            onClick={handleAddProduct}
+                            onClick={handleOrder}
                             size="s"
                           >
                             Place Order

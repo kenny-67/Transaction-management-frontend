@@ -4,21 +4,39 @@ import { motion } from "framer-motion";
 import { genericAdminVariants } from "../../config/animation";
 
 //network
-// import { getAllProduct } from "../../../network/AxiosApi";
+import { getOrders } from "../../network/AxiosApi";
 
 //reactstrap import
 import { Container, Row } from "reactstrap";
 
 function Orders() {
+  const [Orders, setOrders] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
   const buttonPath = user.isAdmin
     ? "/admin/create-order"
     : "/employee/create-order";
-  const order = [];
+
+  useEffect(() => {
+    const getOrdersCall = async () => {
+      const { data } = await getOrders();
+      setOrders(data.order);
+      console.log(data);
+    };
+
+    getOrdersCall();
+  }, []);
+
   const tableData = {
     tableName: "Order tables",
-    product: order,
-    tableHead: ["Order Id", "Price", "Date Of Order"],
+    product: Orders,
+    tableHead: [
+      "Order Id",
+      "User Id",
+      "Total",
+      "Amount Paid",
+      "Status",
+      "Date Of Order",
+    ],
   };
   return (
     <>

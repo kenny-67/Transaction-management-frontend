@@ -50,3 +50,19 @@ export const getWarehouse = async (id) =>
 
 //Employee
 export const getAllEmployees = async () => await instance.get(`/employee`);
+
+//Orders
+export const createOrder = async (orderList, total, redirectURL) => {
+  return await instance.post(`/order/create`, {
+    orderList,
+    total,
+    redirectURL,
+  });
+};
+export const getOrders = async () => {
+  return await instance.get(`/order`);
+};
+
+export const getOrder = async (id) => {
+  return await instance.get(`/order:${id}`); 
+};
