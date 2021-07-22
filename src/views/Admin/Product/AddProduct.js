@@ -15,7 +15,7 @@ import {
 } from "reactstrap";
 import { motion } from "framer-motion";
 import { genericAdminVariants } from "../../../config/animation";
-import { createProduct, getAllWarehouse } from "../../../network/AxiosApi";
+import { createProduct, getAllStore } from "../../../network/AxiosApi";
 
 function AddProduct() {
   const [FormInfo, setFormInfo] = useState({
@@ -25,16 +25,16 @@ function AddProduct() {
     originalPrice: "",
     description: "",
     dateOfPurchase: "",
-    warehouseId: "",
+    storeId: "",
   });
-  const [Warehouse, setWarehouse] = useState([]);
+  const [Store, setStore] = useState([]);
 
   useEffect(() => {
-    const getWarehouseCall = async () => {
-      const response = await getAllWarehouse();
-      setWarehouse(response.data.warehouses);
+    const getStoreCall = async () => {
+      const response = await getAllStore();
+      setStore(response.data.stores);
     };
-    getWarehouseCall();
+    getStoreCall();
   }, []);
 
   const handleFormChange = (e) => {
@@ -49,13 +49,13 @@ function AddProduct() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let warehouseId;
-    Warehouse.forEach((item) => {
-      if (item.warehouseName === FormInfo.warehouseId) {
-        warehouseId = item._id;
+    let storeId;
+    Store.forEach((item) => {
+      if (item.storeName === FormInfo.storeId) {
+        storeId = item._id;
       }
     });
-    const response = await createProduct({ ...FormInfo, warehouseId });
+    const response = await createProduct({ ...FormInfo, storeId });
     if (response.data.success) {
       setFormInfo({
         productName: "",
@@ -64,7 +64,7 @@ function AddProduct() {
         originalPrice: "",
         description: "",
         dateOfPurchase: "",
-        warehouseId: "",
+        storeId: "",
       });
     }
   };
@@ -151,19 +151,19 @@ function AddProduct() {
                               className="form-control-label"
                               htmlFor="input-city"
                             >
-                              Warehouse Name
+                              Store Name
                             </label>
                             <Input
                               className="form-control-alternative"
                               id="input-city"
                               placeholder="City"
                               type="select"
-                              name="warehouseId"
-                              value={FormInfo.warehouseId}
+                              name="storeId"
+                              value={FormInfo.storeId}
                               onChange={handleFormChange}
                             >
-                              {Warehouse.map((item, key) => (
-                                <option key={key}>{item.warehouseName}</option>
+                              {Store.map((item, key) => (
+                                <option key={key}>{item.storeName}</option>
                               ))}
                             </Input>
                           </FormGroup>
@@ -223,7 +223,6 @@ function AddProduct() {
                               name="originalPrice"
                               value={FormInfo.originalPrice}
                               onChange={handleFormChange}
-                            
                             />
                           </FormGroup>
                         </Col>

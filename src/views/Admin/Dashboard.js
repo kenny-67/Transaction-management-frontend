@@ -23,9 +23,18 @@ import {
 import classnames from "classnames";
 import ItermTable from "../../components/Tables/ItermTable";
 // // javascipt plugin for creating charts
-// import Chart from "chart.js"
+import Chart from "chart.js";
 // // react plugin used to create charts
-// import { Line, Bar } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
+
+// import {
+//   // chartOptions,
+//   // parseOptions,
+//   // chartExample1,
+//   // chartExample2,
+// } from "../../variables/chart.js";
+
+import { mainBar } from "../../variables/chart.js";
 
 function Dashboard() {
   const [activeNav, setActivenav] = useState(1);
@@ -175,10 +184,12 @@ function Dashboard() {
                 <CardBody>
                   {/* Chart */}
                   <div className="chart">
-                    {/* <Bar
-                    data={chartExample2.data}
-                    options={chartExample2.options}
-                  /> */}
+                    <Bar
+                      data={mainBar.data}
+                      options={mainBar.options}
+                      height={3000}
+                      width={200}
+                    />
                   </div>
                 </CardBody>
               </Card>

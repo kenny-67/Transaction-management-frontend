@@ -13,6 +13,7 @@ import Employee from "./views/Admin/Employees/Employees";
 import AddEmployee from "./views/Admin/Employees/AddEmployee";
 import Orders from "./views/Generic/Orders";
 import CreateOrder from "./views/Generic/CreateOrder";
+import Report from "./views/Admin/Report/Report";
 
 const routes = [
   {
@@ -95,14 +96,14 @@ const routes = [
     layout: "/admin",
     api: false,
   },
-  {
-    path: "/warehouses",
-    name: "warehouse",
-    icon: "fas fa-house-user",
-    component: Warehouses,
-    layout: "/admin",
-    api: false,
-  },
+  // {
+  //   path: "/warehouses",
+  //   name: "warehouse",
+  //   icon: "fas fa-house-user",
+  //   component: Warehouses,
+  //   layout: "/admin",
+  //   api: false,
+  // },
   {
     path: "/add-product",
     name: "Add Product",
@@ -134,6 +135,14 @@ const routes = [
     component: CreateOrder,
     layout: "/admin",
     api: true,
+  },
+  {
+    path: "/report",
+    name: "Report",
+    icon: "ni ni-tv-2 text-primary",
+    component: Report,
+    layout: "/admin",
+    api: false,
   },
   {
     path: "/index",

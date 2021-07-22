@@ -51,6 +51,8 @@ export const getWarehouse = async (id) =>
 //Employee
 export const getAllEmployees = async () => await instance.get(`/employee`);
 
+export const getAllEmployee = async (url) => await instance.get(url);
+
 //Orders
 export const createOrder = async (orderList, total, redirectURL) => {
   return await instance.post(`/order/create`, {
@@ -64,5 +66,19 @@ export const getOrders = async () => {
 };
 
 export const getOrder = async (id) => {
-  return await instance.get(`/order:${id}`); 
+  return await instance.get(`/order:${id}`);
+};
+
+//reoprt
+export const generateReport = async (data) => {
+  console.log(data);
+  return await instance.post(`/report/${data.reportType}`, {
+    endDate: data.endDate,
+    startDate: data.startDate,
+  });
+};
+
+//dashboard
+export const getAdminHeaderData = async () => {
+  return await instance.get(`/dashboard/adminHeader`);
 };

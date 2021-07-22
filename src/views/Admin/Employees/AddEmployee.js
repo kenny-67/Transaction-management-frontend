@@ -29,18 +29,11 @@ function AddEmployee() {
     phoneNumber: "",
     password: "",
     confirmpassword: "",
-    userType: "",
+    userType: "Store Employee",
     designationName: "",
   });
   const [warehouseList, setWarehouseList] = useState([]);
   const [storeList, setStoreList] = useState([]);
-
-  useEffect(() => {
-    setFormInfo((prev) => ({
-      ...prev,
-      userType: "Store Employee",
-    }));
-  }, []);
 
   useEffect(() => {
     const getIdCall = async () => {
@@ -88,12 +81,6 @@ function AddEmployee() {
     let id;
     let requestObject;
     if (FormInfo.userType === "Store Employee") {
-      await storeList.forEach((store) => {
-        if (store.storeName === FormInfo.designationName) {
-          id = store._id;
-        }
-      });
-
       requestObject = {
         firstName: FormInfo.firstName,
         lastName: FormInfo.lastName,
@@ -101,7 +88,7 @@ function AddEmployee() {
         email: FormInfo.email,
         userType: FormInfo.userType,
         password: FormInfo.password,
-        storeid: id,
+        storeName: FormInfo.designationName,
       };
     }
     if (FormInfo.userType === "Warehouse Employee") {
@@ -127,7 +114,6 @@ function AddEmployee() {
         lastName: "",
         email: "",
         phoneNumber: "",
-        userType: "",
         designationName: "",
         password: "",
         confirmpassword: "",
@@ -292,7 +278,7 @@ function AddEmployee() {
                               onChange={handleFormChange}
                             >
                               <option>Store Employee</option>
-                              <option>Warehouse Employee</option>
+                              {/* <option>Warehouse Employee</option> */}
                             </Input>
                           </FormGroup>
                         </Col>

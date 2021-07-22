@@ -31,6 +31,7 @@ function Products() {
       "Original Price",
       "Selling price",
       "Date Of Purchase",
+      "Store Id",
     ],
   };
 
@@ -49,6 +50,7 @@ function Products() {
               buttonName="Add Product"
               path="/admin/add-product"
               hasButton
+              // filter
             />
           </Row>
         </motion.div>

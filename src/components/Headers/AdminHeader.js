@@ -1,11 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { AdminPageLayoutVariants } from "../../config/animation";
 
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
 
+import { getAdminHeaderData } from "../../network/AxiosApi";
+
 function AdminHeader() {
+  const [Anylitycs, setAnylitycs] = useState({
+    orders: 0,
+    products: 0,
+    employees: 0,
+    stores: 0,
+  });
+
+  useEffect(() => {
+    const apiCall = async () => {
+      const { data } = await getAdminHeaderData();
+      console.log(data);
+
+      if (data.success) {
+        setAnylitycs(data.data);
+      } else {
+        alert(data.error);
+      }
+    };
+
+    apiCall();
+  }, []);
   return (
     <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
       <Container fluid>
@@ -26,9 +49,11 @@ function AdminHeader() {
                         tag="h5"
                         className="text-uppercase text-muted mb-0"
                       >
-                        Traffic
+                        Employees
                       </CardTitle>
-                      <span className="h2 font-weight-bold mb-0">350,897</span>
+                      <span className="h2 font-weight-bold mb-0">
+                        {Anylitycs.employees}
+                      </span>
                     </div>
                     <Col className="col-auto">
                       <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -54,9 +79,11 @@ function AdminHeader() {
                         tag="h5"
                         className="text-uppercase text-muted mb-0"
                       >
-                        New users
+                        Stores
                       </CardTitle>
-                      <span className="h2 font-weight-bold mb-0">2,356</span>
+                      <span className="h2 font-weight-bold mb-0">
+                        {Anylitycs.stores}
+                      </span>
                     </div>
                     <Col className="col-auto">
                       <div className="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -82,9 +109,11 @@ function AdminHeader() {
                         tag="h5"
                         className="text-uppercase text-muted mb-0"
                       >
-                        Sales
+                        Orders
                       </CardTitle>
-                      <span className="h2 font-weight-bold mb-0">924</span>
+                      <span className="h2 font-weight-bold mb-0">
+                        {Anylitycs.orders}
+                      </span>
                     </div>
                     <Col className="col-auto">
                       <div className="icon icon-shape bg-yellow text-white rounded-circle shadow">
@@ -110,9 +139,11 @@ function AdminHeader() {
                         tag="h5"
                         className="text-uppercase text-muted mb-0"
                       >
-                        Performance
+                        Products
                       </CardTitle>
-                      <span className="h2 font-weight-bold mb-0">49,65%</span>
+                      <span className="h2 font-weight-bold mb-0">
+                        {Anylitycs.products}
+                      </span>
                     </div>
                     <Col className="col-auto">
                       <div className="icon icon-shape bg-info text-white rounded-circle shadow">
