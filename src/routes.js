@@ -14,6 +14,7 @@ import AddEmployee from "./views/Admin/Employees/AddEmployee";
 import Orders from "./views/Generic/Orders";
 import CreateOrder from "./views/Generic/CreateOrder";
 import Report from "./views/Admin/Report/Report";
+import Debtors from "./views/Admin/Debtors/Debtors";
 
 const routes = [
   {
@@ -117,6 +118,14 @@ const routes = [
     name: "Add Employee",
     icon: "ni ni-tv-2 text-primary",
     component: AddEmployee,
+    layout: "/admin",
+    api: true,
+  },
+  {
+    path: "/debtors",
+    name: "Debtors List",
+    icon: "ni ni-tv-2 text-primary",
+    component: Debtors,
     layout: "/admin",
     api: true,
   },

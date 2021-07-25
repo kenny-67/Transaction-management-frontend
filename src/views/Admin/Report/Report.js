@@ -213,7 +213,8 @@ function Report() {
                         <b>Product Count:</b> {reportDetails.productCount}
                       </p>
                       <p style={{ lineHeight: "70%" }}>
-                        <b>Average Number of Product Sold:</b> 2234
+                        <b>Average Number of Product Sold:</b>{" "}
+                        {reportDetails.totalProductsSold}
                       </p>
                       <p style={{ lineHeight: "70%" }}>
                         <b>total Revenue Generated:</b>{" "}
@@ -238,27 +239,26 @@ function Report() {
                           >
                             <thead className="thead-light">
                               <tr>
+                                <th scope="col">Product Id</th>
                                 <th scope="col">Product Name</th>
-                                <th scope="col">Amount Sold</th>
                                 <th scope="col">Revenue Generated</th>
-                                <th scope="col">Profit</th>
+                                <th scope="col">Amount Sold</th>
                               </tr>
                             </thead>
-
-                            {/* {tableData.product ? (
-                          <tbody>
-                            {tableData.product.map((productObj, key) => (
-                              <tr key={key}>
-                                <ProductRow
-                                  productObj={productObj}
-                                  hasImage={hasImage}
-                                />
-                              </tr>
-                            ))}
-                          </tbody>
-                        ) : (
-                          <div>Loading item</div>
-                        )} */}
+                            <tbody>
+                              {reportDetails &&
+                                reportDetails.bestSelling.map(
+                                  (product, key) => (
+                                    <tr key={key}>
+                                      {Object.entries(product).map(
+                                        (item, key) => (
+                                          <td key={key}>{item[1]}</td>
+                                        )
+                                      )}
+                                    </tr>
+                                  )
+                                )}
+                            </tbody>
                           </Table>
                         </Card>
                       </div>
@@ -278,7 +278,7 @@ function Report() {
                           >
                             <thead className="thead-light">
                               <tr>
-                              <th scope="col">Product Id</th>
+                                <th scope="col">Product Id</th>
                                 <th scope="col">Product Name</th>
                                 <th scope="col">Amount Sold</th>
                                 <th scope="col">Revenue Generated</th>
