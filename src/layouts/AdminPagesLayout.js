@@ -11,7 +11,7 @@ import AdminHeader from "../components/Headers/AdminHeader";
 // reactstrap components
 import { Container } from "reactstrap";
 
-import logo from "../assets/img/brand/argon-react.png";
+import logo from "../assets/img/appLogo.jpg";
 
 import routes from "../routes.js";
 
@@ -53,7 +53,7 @@ class AdminPageLayout extends React.Component {
           routes={routes}
           logo={{
             innerLink: "/admin/index",
-            imgSrc: { logo },
+            imgSrc: require("assets/img/appLogo.png").default,
             imgAlt: "...",
           }}
         />
