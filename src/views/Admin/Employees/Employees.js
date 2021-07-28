@@ -7,39 +7,9 @@ import { Container, Row } from "reactstrap";
 import { motion } from "framer-motion";
 import { genericAdminVariants } from "../../../config/animation";
 
-//network
-import { getAllEmployees, getAllStore } from "../../../network/AxiosApi";
-
 function Employees() {
-  const [Employees, setEmployees] = useState([]);
-  const [Stores, setStores] = useState([]);
-
-  useEffect(() => {
-    const getProductFunction = async () => {
-      const response = await getAllEmployees();
-      const storeResponse = await getAllStore();
-      const { data } = response;
-
-      console.log(response);
-
-      setEmployees(data.employees);
-      setStores(storeResponse.data.stores);
-    };
-
-    getProductFunction();
-  }, []);
-
-  let StoreNames = [];
-  //extract Store name
-  if (Stores.length > 0) {
-    Stores.forEach((store) => {
-      StoreNames.push(store.storeName);
-    });
-  }
-
   const tableData = {
-    tableName: "Employees tables",
-    product: Employees,
+    tableName: "Employees Table",
     tableHead: [
       "Employee Id",
       "First Name",
@@ -49,11 +19,6 @@ function Employees() {
       "Employee Type",
       "Branch Id",
     ],
-    selectData: {
-      stores: StoreNames,
-      sortBy: ["First Name", "Last Name"],
-    },
-    filterBy: ["none", "Branch Name", "A - Z"],
   };
   return (
     <>
@@ -70,7 +35,7 @@ function Employees() {
               buttonName="Add Employee"
               path="/admin/add-employee"
               hasButton
-              filter
+              // filter
             />
           </Row>
         </motion.div>

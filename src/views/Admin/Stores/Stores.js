@@ -7,23 +7,9 @@ import { Container, Row } from "reactstrap";
 import { motion } from "framer-motion";
 import { genericAdminVariants } from "../../../config/animation";
 
-//network
-import { getAllStore } from "../../../network/AxiosApi";
-
 function Stores() {
-  const [Stores, setStores] = useState([]);
-
-  useEffect(() => {
-    const getProductFunction = async () => {
-      const response = await getAllStore();
-      const { data } = response;
-      setStores(data.stores);
-    };
-    getProductFunction();
-  }, []);
   const tableData = {
-    tableName: "Stores tables",
-    product: Stores,
+    tableName: "Stores Tables",
     tableHead: ["Store Id", "Store Name", "Address"],
   };
   return (

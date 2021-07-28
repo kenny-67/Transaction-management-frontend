@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 //reactstrap import
@@ -14,8 +14,23 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
 } from "reactstrap";
-// import { getAllEmployee } from "../../../../Transaction Management back-end/controllers/employeeController";
+
+//styled component
+import styled from "styled-components";
+
+//network
+import {
+  getOrders,
+  getAllProduct,
+  getAllDebtor,
+  getAllEmployees,
+  getAllWarehouse,
+  getAllStore,
+} from "../../network/AxiosApi";
 
 const EmployeeSelect = (props) => {
   const { selectData } = props;
@@ -107,11 +122,52 @@ function ItermTable(props) {
     path = "",
     hasButton,
     filter,
+    rowOnClickFunction,
   } = props;
-  const { selectData } = tableData;
+  const { selectData, tableName } = tableData;
+  const [apiData, setApiData] = useState({});
+
+  let apiEndpoint;
+
+  //pagination Data
+  let nextPage = null;
+  let previousPage = null;
+  let totalPages = null;
+  let currentPage = 1;
+
+  const getApiData = async (page) => {
+    tableName === "Order Table"
+      ? (apiEndpoint = getOrders)
+      : tableName === "Product Table"
+      ? (apiEndpoint = getAllProduct)
+      : tableName === "Debtors Table"
+      ? (apiEndpoint = getAllDebtor)
+      : tableName === "Employees Table"
+      ? (apiEndpoint = getAllEmployees)
+      : tableName === "Stores Tables"
+      ? (apiEndpoint = getAllStore)
+      : (apiEndpoint = getAllWarehouse);
+    const { data } = await apiEndpoint(page);
+    setApiData(data);
+  };
+
+  useEffect(() => {
+    getApiData(1);
+  }, []);
+
+  if (apiData.success) {
+    nextPage = apiData.paginationData.nextPage;
+    previousPage = apiData.paginationData.previousPage;
+    totalPages = apiData.paginationData.totalPages;
+    currentPage = apiData.paginationData.currentPage;
+  }
+
+  const handlePages = async (page) => {
+    getApiData(page);
+  };
 
   return (
-    <div className="col">
+    <ItermTable.Wrapper className="col">
       <Card className="shadow">
         <CardHeader className="border-0" style={{ position: "relative" }}>
           <h3 className="mb-0">{tableData.tableName}</h3>
@@ -137,12 +193,23 @@ function ItermTable(props) {
               ))}
             </tr>
           </thead>
-          {tableData.product ? (
+          {apiData.data ? (
             <tbody>
-              {tableData.product.map((productObj, key) => (
-                <tr key={key}>
-                  <ProductRow productObj={productObj} hasImage={hasImage} />
-                </tr>
+              {apiData.data.map((productObj, key) => (
+                <>
+                  {rowOnClickFunction ? (
+                    <tr
+                      key={key}
+                      onClick={() => rowOnClickFunction(productObj)}
+                    >
+                      <ProductRow productObj={productObj} hasImage={hasImage} />
+                    </tr>
+                  ) : (
+                    <tr key={key}>
+                      <ProductRow productObj={productObj} hasImage={hasImage} />
+                    </tr>
+                  )}
+                </>
               ))}
             </tbody>
           ) : (
@@ -150,8 +217,42 @@ function ItermTable(props) {
           )}
         </Table>
       </Card>
-    </div>
+      <div className="pagination">
+        <Pagination aria-label="Page navigation example">
+          <PaginationItem>
+            <PaginationLink first onClick={() => handlePages(1)} />
+          </PaginationItem>
+          <PaginationItem disabled={nextPage == null}>
+            <PaginationLink
+              previous
+              onClick={() => handlePages(previousPage)}
+            />
+          </PaginationItem>
+          {[...Array(totalPages)].map((page, i) => (
+            <PaginationItem key={i} active={currentPage == i + 1}>
+              <PaginationLink onClick={() => handlePages(i + 1)}>
+                {i + 1}
+              </PaginationLink>
+            </PaginationItem>
+          ))}
+
+          <PaginationItem disabled={nextPage == null}>
+            <PaginationLink next onClick={() => handlePages(nextPage)} />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink last onClick={() => handlePages(totalPages)} />
+          </PaginationItem>
+        </Pagination>
+      </div>
+    </ItermTable.Wrapper>
   );
 }
+
+ItermTable.Wrapper = styled.div`
+  .pagination {
+    margin-top: 10px;
+    margin-left: 33%;
+  }
+`;
 
 export default ItermTable;

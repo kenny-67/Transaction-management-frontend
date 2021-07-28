@@ -10,25 +10,13 @@ import { getOrders } from "../../network/AxiosApi";
 import { Container, Row } from "reactstrap";
 
 function Orders() {
-  const [Orders, setOrders] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
   const buttonPath = user.isAdmin
     ? "/admin/create-order"
     : "/employee/create-order";
 
-  useEffect(() => {
-    const getOrdersCall = async () => {
-      const { data } = await getOrders();
-      setOrders(data.order);
-      console.log(data);
-    };
-
-    getOrdersCall();
-  }, []);
-
   const tableData = {
-    tableName: "Order tables",
-    product: Orders,
+    tableName: "Order Table",
     tableHead: [
       "Order Id",
       "User Id",

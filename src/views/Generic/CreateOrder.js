@@ -23,7 +23,7 @@ import {
 import { motion } from "framer-motion";
 import { genericAdminVariants } from "../../config/animation";
 import { createOrder, getAllProduct } from "../../network/AxiosApi";
-import SelectedProducts from "./SelectedProducts";
+
 
 const customStyles = {
   option: (provided, state) => ({
@@ -78,7 +78,7 @@ function CreateOrder() {
   useEffect(() => {
     const getProductCall = async () => {
       const response = await getAllProduct();
-      setProduct(response.data.products);
+      setProduct(response.data.data);
     };
     getProductCall();
   }, []);
@@ -120,7 +120,13 @@ function CreateOrder() {
     }
   };
 
-  ////////////////////////////////////////////////////////////////////////
+  const handleDeleteProduct = (productToRemove) => {
+    setOrderList((prev) =>
+      prev.filter((product) => {
+        return productToRemove !== product;
+      })
+    );
+  };
 
   const checkAmount = (amountPaidByCustomer) => {
     if (show && amountPaidByCustomer < Total) {
@@ -500,6 +506,7 @@ function CreateOrder() {
 
                                   <th>Quantity</th>
                                   <th>Price</th>
+                                  <th>Action</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -508,6 +515,13 @@ function CreateOrder() {
                                     <td>{product.productName}</td>
                                     <td>{product.quantity}</td>
                                     <td>{product.price}</td>
+                                    <td
+                                      className="fas fa-trash-alt"
+                                      style={{ cursor: "pointer" }}
+                                      onClick={() =>
+                                        handleDeleteProduct(product)
+                                      }
+                                    ></td>
                                   </tr>
                                 ))}
                               </tbody>

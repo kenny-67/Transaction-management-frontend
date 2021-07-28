@@ -73,8 +73,8 @@ export const createOrder = async (
   });
 };
 
-export const getOrders = async () => {
-  return await instance.get(`/order`);
+export const getOrders = async (page) => {
+  return await instance.get(`/order?page=${page}`);
 };
 
 export const getOrder = async (id) => {
@@ -97,3 +97,5 @@ export const getAdminHeaderData = async () => {
 
 //debt
 export const getAllDebtor = async () => await instance.get(`/debtor`);
+export const clearDebt = async (requestData) =>
+  await instance.post(`/debtor/clear`, requestData);

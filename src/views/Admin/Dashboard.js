@@ -27,13 +27,6 @@ import Chart from "chart.js";
 // // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
 
-// import {
-//   // chartOptions,
-//   // parseOptions,
-//   // chartExample1,
-//   // chartExample2,
-// } from "../../variables/chart.js";
-
 import { mainBar } from "../../variables/chart.js";
 
 function Dashboard() {
@@ -198,7 +191,7 @@ function Dashboard() {
 
           <Row className="mt-5">
             <Col className="mb-5 mb-xl-0" xl="8">
-              <ItermTable tableData={topSellingData} hasImage />
+              {/* <ItermTable tableData={topSellingData} hasImage /> */}
             </Col>
             <Col xl="4">
               <Card className="shadow">

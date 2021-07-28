@@ -3,27 +3,12 @@ import ItermTable from "../../../components/Tables/ItermTable";
 import { motion } from "framer-motion";
 import { genericAdminVariants } from "../../../config/animation";
 
-//network
-import { getAllProduct } from "../../../network/AxiosApi";
-
 //reactstrap import
 import { Container, Row } from "reactstrap";
 
 function Products() {
-  const [Products, setProduct] = useState([]);
-
-  useEffect(() => {
-    const getProductFunction = async () => {
-      const response = await getAllProduct();
-      const { data } = response;
-      setProduct(data.products);
-    };
-    getProductFunction();
-  }, []);
-
   const tableData = {
-    tableName: "Product tables",
-    product: Products,
+    tableName: "Product Table",
     tableHead: [
       "Product Id",
       "Product Name",
