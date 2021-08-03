@@ -36,12 +36,19 @@ export const logOut = async (token) => {
 //product
 export const createProduct = async (data) =>
   await instance.post(`/product/create`, data);
-export const getAllProduct = async () => await instance.get(`/product`);
+export const getAllProduct = async (page) =>
+  await instance.get(`/product?page=${page}`);
 export const getProduct = async (id) => await instance.get(`/product/${id}`);
+
+//for search list
+export const getAllProductSearchList = async () =>
+  await instance.get(`/product/searchList`);
 
 //store
 export const getAllStore = async () => await instance.get(`/store`);
 export const getStore = async (id) => await instance.get(`/store/${id}`);
+export const createStore = async (data) =>
+  await instance.post(`/store/create`, data);
 
 //warehouse
 export const getAllWarehouse = async () => await instance.get(`/warehouse`);

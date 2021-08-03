@@ -20,6 +20,8 @@ function Products() {
     ],
   };
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
   return (
     <>
       <Container className="mt--7" fluid>
@@ -29,15 +31,24 @@ function Products() {
           animate="enter"
           exit="exit"
         >
-          <Row>
-            <ItermTable
-              tableData={tableData}
-              buttonName="Add Product"
-              path="/admin/add-product"
-              hasButton
-              // filter
-            />
-          </Row>
+          {user.isAdmin ? (
+            <Row>
+              <ItermTable
+                tableData={tableData}
+                buttonName="Add Product"
+                path="/admin/add-product"
+                hasButton
+              />
+            </Row>
+          ) : (
+            <Row>
+              <ItermTable
+                tableData={tableData}
+                buttonName="Add Product"
+                path="/admin/add-product"
+              />
+            </Row>
+          )}
         </motion.div>
       </Container>
     </>

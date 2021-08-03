@@ -7,6 +7,7 @@ import ConfirmEmail from "./views/Authentication/ConfirmEmail";
 import Dashboard from "./views/Admin/Dashboard";
 import Products from "./views/Admin/Product/Products";
 import Stores from "./views/Admin/Stores/Stores";
+import AddStores from "./views/Admin/Stores/AddStores";
 import Warehouses from "./views/Admin/Warehouse/Warehouses";
 import AddProduct from "./views/Admin/Product/AddProduct";
 import Employee from "./views/Admin/Employees/Employees";
@@ -110,6 +111,14 @@ const routes = [
     name: "Add Product",
     icon: "ni ni-tv-2 text-primary",
     component: AddProduct,
+    layout: "/admin",
+    api: true,
+  },
+  {
+    path: "/add-store",
+    name: "Add Store",
+    icon: "ni ni-tv-2 text-primary",
+    component: AddStores,
     layout: "/admin",
     api: true,
   },

@@ -22,8 +22,11 @@ import {
 } from "reactstrap";
 import { motion } from "framer-motion";
 import { genericAdminVariants } from "../../config/animation";
-import { createOrder, getAllProduct } from "../../network/AxiosApi";
-
+import {
+  createOrder,
+  getAllProduct,
+  getAllProductSearchList,
+} from "../../network/AxiosApi";
 
 const customStyles = {
   option: (provided, state) => ({
@@ -77,7 +80,8 @@ function CreateOrder() {
 
   useEffect(() => {
     const getProductCall = async () => {
-      const response = await getAllProduct();
+      console.log("calling");
+      const response = await getAllProductSearchList();
       setProduct(response.data.data);
     };
     getProductCall();
@@ -99,18 +103,36 @@ function CreateOrder() {
   });
 
   const handleAddProduct = () => {
-    console.log(SelectedProduct);
+    console.log(SelectedProduct.split(" ").length);
+    const splitted = SelectedProduct.split(" ");
     if (SelectedProduct && Quantity) {
-      let price = +SelectedProduct.split(" ")[2] * Quantity;
-      let newProduct = SelectedProduct.split(" ")[0];
-      let productId = SelectedProduct.split(" ")[3];
+      let orderObj = {};
+      if (splitted.length == 5) {
+        let price = +SelectedProduct.split(" ")[3] * Quantity;
+        let newProduct = `${SelectedProduct.split(" ")[0]} ${
+          SelectedProduct.split(" ")[1]
+        }`;
+        let productId = SelectedProduct.split(" ")[4];
 
-      const orderObj = {
-        productName: newProduct,
-        quantity: Quantity,
-        price: price,
-        productId,
-      };
+        orderObj = {
+          productName: newProduct,
+          quantity: Quantity,
+          price: price,
+          productId,
+        };
+      } else {
+        let price = +SelectedProduct.split(" ")[2] * Quantity;
+        let newProduct = `${SelectedProduct.split(" ")[0]}`;
+        let productId = SelectedProduct.split(" ")[3];
+
+        orderObj = {
+          productName: newProduct,
+          quantity: Quantity,
+          price: price,
+          productId,
+        };
+      }
+
       console.log(orderObj);
       setOrderList((prev) => [...prev, orderObj]);
       setSelectedProduct("");
@@ -153,7 +175,7 @@ function CreateOrder() {
     if (!isComplete) {
       setModal(!modal);
     } else {
-      const user = JSON.parse(localStorage.getItem("user"));
+      // const user = JSON.parse(localStorage.getItem("user"));
       const redirectUrl = user.isAdmin
         ? "http://localhost:3000/admin/orders"
         : "http://localhost:3000/employee/orders";
@@ -241,7 +263,7 @@ function CreateOrder() {
     } else {
       //card endpoint
 
-      const user = JSON.parse(localStorage.getItem("user"));
+      // const user = JSON.parse(localStorage.getItem("user"));
       const redirectUrl = user.isAdmin
         ? "http://localhost:3000/admin/orders"
         : "http://localhost:3000/employee/orders";
@@ -424,17 +446,19 @@ function CreateOrder() {
                         </Button>
                       </Link>
                     </Col>
-                    <Col
-                      className="text-right"
-                      xs="14"
-                      style={{ marginLeft: "70%", marginTop: "-30px" }}
-                    >
-                      <Link to="/admin/debtors">
-                        <Button color="primary" size="sm">
-                          View Debtors
-                        </Button>
-                      </Link>
-                    </Col>
+                    {user.isAdmin && (
+                      <Col
+                        className="text-right"
+                        xs="14"
+                        style={{ marginLeft: "70%", marginTop: "-30px" }}
+                      >
+                        <Link to="/admin/debtors">
+                          <Button color="primary" size="sm">
+                            View Debtors
+                          </Button>
+                        </Link>
+                      </Col>
+                    )}
                   </Row>
                 </CardHeader>
                 <CardBody>
@@ -535,13 +559,16 @@ function CreateOrder() {
                               Total: {Total}
                             </div>
                           </Card>
-                          <span>
-                            Set Amount{" "}
-                            <input
-                              type="checkbox"
-                              onChange={(e) => toggleAmount(e.target.checked)}
-                            />
-                          </span>
+                          {user.isAdmin && (
+                            <span>
+                              Set Amount{" "}
+                              <input
+                                type="checkbox"
+                                onChange={(e) => toggleAmount(e.target.checked)}
+                              />
+                            </span>
+                          )}
+
                           {show && (
                             <FormGroup>
                               <label

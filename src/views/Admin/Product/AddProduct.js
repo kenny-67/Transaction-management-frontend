@@ -32,7 +32,7 @@ function AddProduct() {
   useEffect(() => {
     const getStoreCall = async () => {
       const response = await getAllStore();
-      setStore(response.data.stores);
+      setStore(response.data.data);
     };
     getStoreCall();
   }, []);

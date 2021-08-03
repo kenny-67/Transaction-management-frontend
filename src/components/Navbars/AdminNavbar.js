@@ -24,7 +24,7 @@ import profileAvatar from "../../assets/img/theme/team-4-800x800.jpg";
 import { logOut } from "../../network/AxiosApi";
 
 function AdminNavbar(props) {
-  // let username = JSON.parse(localStorage.getItem("user")).name;
+  let username = JSON.parse(localStorage.getItem("user")).firstName;
 
   const handleLogOut = async () => {
     localStorage.removeItem("token");
@@ -70,12 +70,15 @@ function AdminNavbar(props) {
               <DropdownToggle className="pr-0" nav>
                 <Media className="align-items-center">
                   <span className="avatar avatar-sm rounded-circle">
-                    <img alt="..." src={profileAvatar.default} />
+                    <img
+                      alt="..."
+                      src={require("assets/img/profileAvatar.png").default}
+                    />
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
                     <span className="mb-0 text-sm font-weight-bold">
-                      {/* {username} */}
-                      kenny
+                      {username}
+                      {/* kenny */}
                     </span>
                   </Media>
                 </Media>

@@ -11,10 +11,7 @@ import AdminHeader from "../components/Headers/AdminHeader";
 // reactstrap components
 import { Container } from "reactstrap";
 
-import logo from "../assets/img/brand/argon-react.png";
-
 import routes from "../routes.js";
-import NotFoundPage from "../components/Error/NotFoundPage";
 
 class EmployeePageLayout extends React.Component {
   getRoutes = (routes) => {
@@ -54,7 +51,7 @@ class EmployeePageLayout extends React.Component {
           routes={routes}
           logo={{
             innerLink: "/employee/index",
-            imgSrc: { logo },
+            imgSrc: require("assets/img/appLogo.png").default,
             imgAlt: "...",
           }}
         />

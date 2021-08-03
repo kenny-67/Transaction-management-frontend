@@ -21,15 +21,10 @@ import {
 } from "reactstrap";
 
 //network
-import { clearDebt } from "../../../network/AxiosApi";
+import { clearDebt, getAllDebtor } from "../../../network/AxiosApi";
 
 function Debtors() {
   const user = JSON.parse(localStorage.getItem("user"));
-  const buttonPath = user.isAdmin
-    ? "/admin/create-order"
-    : "/employee/create-order";
-
-  useEffect(() => {}, []);
 
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -60,7 +55,6 @@ function Debtors() {
   const toggle = () => setShowModal(!showModal);
 
   const handleDebt = (obj) => {
-    console.log(obj);
     if (obj.amountOwed > 0) {
       setFirstName(obj.firstName);
       setLastName(obj.lastName);
@@ -86,11 +80,17 @@ function Debtors() {
       redirectURL,
     };
     const { data } = await clearDebt(reqObj);
-    if (data.success) {
+    if (paymentType === "CARD") {
+      if (data.success) {
+        setLoading(false);
+        setShowModal(false);
+        const redirectLink = data.message.data.link;
+        window.location.href = redirectLink;
+      }
+    } else {
       setLoading(false);
       setShowModal(false);
-      const redirectLink = data.message.data.link;
-      window.location.href = redirectLink;
+      window.location.reload(false);
     }
   };
 

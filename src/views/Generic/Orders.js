@@ -3,9 +3,6 @@ import ItermTable from "../../components/Tables/ItermTable";
 import { motion } from "framer-motion";
 import { genericAdminVariants } from "../../config/animation";
 
-//network
-import { getOrders } from "../../network/AxiosApi";
-
 //reactstrap import
 import { Container, Row } from "reactstrap";
 
@@ -41,7 +38,6 @@ function Orders() {
               buttonName="create order"
               path={buttonPath}
               hasButton
-              // filter
             />
           </Row>
         </motion.div>
