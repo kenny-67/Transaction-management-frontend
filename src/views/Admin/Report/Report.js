@@ -205,7 +205,7 @@ function Report() {
                         textAlign: "center",
                       }}
                     >
-                      <h1>PENNY MART SUPERMARKET</h1>
+                      <h1>GOD'S WILL SUPERMARKET</h1>
                       <p>Product Report</p>
                     </div>
                     <div className="report-statistics">
@@ -241,8 +241,8 @@ function Report() {
                               <tr>
                                 <th scope="col">Product Id</th>
                                 <th scope="col">Product Name</th>
-                                <th scope="col">Revenue Generated</th>
                                 <th scope="col">Amount Sold</th>
+                                <th scope="col">Revenue Generated</th>
                               </tr>
                             </thead>
                             <tbody>
