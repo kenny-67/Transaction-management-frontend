@@ -17,13 +17,16 @@ import {
   Container,
   Row,
   Col,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
 } from "reactstrap";
 
 // node.js library that concatenates classes (strings)
 import classnames from "classnames";
 import ItermTable from "../../components/Tables/ItermTable";
-// // javascipt plugin for creating charts
-import Chart from "chart.js";
+
 // // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
 
@@ -32,6 +35,10 @@ import { mainBar } from "../../variables/chart.js";
 function Dashboard() {
   const [activeNav, setActivenav] = useState(1);
   const [chartData, setChartData] = useState("data1");
+  const [store, setStore] = useState("All");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   const toggleNavs = (e, index) => {
     e.preventDefault();
@@ -39,64 +46,7 @@ function Dashboard() {
     setChartData((prevstate) => (chartData === "data1" ? "data2" : "data1"));
   };
 
-  const Products = [
-    {
-      image:
-        "https://res.cloudinary.com/kenny67/image/upload/v1618997286/vu6yv0ayhfhls08n4rsp.jpg",
-      productName: "Head set",
-      revenue: "100",
-      quantity: "500",
-      Action: "",
-    },
-    {
-      productName: "Head set",
-      revenue: "100",
-      quantity: "500",
-      Action: "",
-    },
-    {
-      productName: "Head set",
-      revenue: "100",
-      quantity: "500",
-      Action: "",
-    },
-    {
-      productName: "Head set",
-      revenue: "100",
-      quantity: "500",
-      Action: "",
-    },
-    {
-      productName: "Head set",
-      revenue: "100",
-      quantity: "500",
-      Action: "",
-    },
-    {
-      productName: "Head set",
-      revenue: "100",
-      quantity: "500",
-      Action: "",
-    },
-    {
-      productName: "Head set",
-      revenue: "100",
-      quantity: "500",
-      Action: "",
-    },
-  ];
-
-  const topSellingData = {
-    tableName: "Top Selling Products",
-    product: Products,
-    tableHead: [
-      "Product Image",
-      "Product Name",
-      "Revenue",
-      "Quantity Available",
-      "Action",
-    ],
-  };
+  const stores = [{ storeName: "Store 1" }, { storeName: "Store 2" }];
 
   return (
     <>
@@ -108,6 +58,27 @@ function Dashboard() {
           animate="enter"
           exit="exit"
         >
+          {/* <Col>
+            <Dropdown
+              isOpen={dropdownOpen}
+              toggle={toggle}
+              onClick={(e) => console.log(e.target.value)}
+            >
+              <DropdownToggle caret>Select Store</DropdownToggle>
+              <DropdownMenu>
+                {stores.map((store, key) => (
+                  <DropdownItem
+                    key={key}
+                    onClick={() => setStore(store.storeName)}
+                  >
+                    {store.storeName}
+                  </DropdownItem>
+                ))}
+
+                <DropdownItem>All</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </Col> */}
           <Row>
             <Col className="mb-5 mb-xl-0" xl="8">
               <Card className="bg-gradient-default shadow">
@@ -153,11 +124,7 @@ function Dashboard() {
                 <CardBody>
                   {/* Chart */}
                   <div className="chart">
-                    {/* <Line
-                    data={chartExample1[state.chartExample1Data]}
-                    options={chartExample1.options}
-                    getDatasetAtEvent={(e) => console.log(e)}
-                  /> */}
+                    <Line data={mainBar.data} options={mainBar.options} />
                   </div>
                 </CardBody>
               </Card>
@@ -192,114 +159,6 @@ function Dashboard() {
           <Row className="mt-5">
             <Col className="mb-5 mb-xl-0" xl="8">
               {/* <ItermTable tableData={topSellingData} hasImage /> */}
-            </Col>
-            <Col xl="4">
-              <Card className="shadow">
-                <CardHeader className="border-0">
-                  <Row className="align-items-center">
-                    <div className="col">
-                      <h3 className="mb-0">Social traffic</h3>
-                    </div>
-                    <div className="col text-right">
-                      <Button
-                        color="primary"
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                        size="sm"
-                      >
-                        See all
-                      </Button>
-                    </div>
-                  </Row>
-                </CardHeader>
-                <Table className="align-items-center table-flush" responsive>
-                  <thead className="thead-light">
-                    <tr>
-                      <th scope="col">Referral</th>
-                      <th scope="col">Visitors</th>
-                      <th scope="col" />
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">Facebook</th>
-                      <td>1,480</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <span className="mr-2">60%</span>
-                          <div>
-                            <Progress
-                              max="100"
-                              value="60"
-                              barClassName="bg-gradient-danger"
-                            />
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Facebook</th>
-                      <td>5,480</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <span className="mr-2">70%</span>
-                          <div>
-                            <Progress
-                              max="100"
-                              value="70"
-                              barClassName="bg-gradient-success"
-                            />
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Google</th>
-                      <td>4,807</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <span className="mr-2">80%</span>
-                          <div>
-                            <Progress max="100" value="80" />
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Instagram</th>
-                      <td>3,678</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <span className="mr-2">75%</span>
-                          <div>
-                            <Progress
-                              max="100"
-                              value="75"
-                              barClassName="bg-gradient-info"
-                            />
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">twitter</th>
-                      <td>2,645</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <span className="mr-2">30%</span>
-                          <div>
-                            <Progress
-                              max="100"
-                              value="30"
-                              barClassName="bg-gradient-warning"
-                            />
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </Card>
             </Col>
           </Row>
         </motion.div>
