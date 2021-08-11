@@ -24,6 +24,7 @@ ReactDOM.render(
     <Switch>
       <AdminRoutes path="/admin" component={AdminPageLayout} />
       <AuthRoute path="/auth" component={AuthPagesLayout} />
+      <AuthRoute path="/" component={AuthPagesLayout} />
       <EmployeeRoutes path="/employee" component={EmployeePageLayout} />
       <NotFoundPage />
     </Switch>

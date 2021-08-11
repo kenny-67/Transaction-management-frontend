@@ -5,7 +5,7 @@ function NotFoundPage() {
   const user = JSON.parse(localStorage.getItem("user"));
   let path;
 
-  if (user.isAdmin) {
+  if (user && user.isAdmin) {
     path = `/admin`;
   } else {
     path = `/employee`;

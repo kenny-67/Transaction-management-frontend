@@ -4,6 +4,7 @@ import { Route, Redirect } from "react-router-dom";
 function AuthRoute(props) {
   const { component: Component, path } = props;
   const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user"));
   console.log(token);
   return (
     <Route
@@ -15,7 +16,11 @@ function AuthRoute(props) {
           </>
         ) : (
           <>
-            <Redirect to="/admin/index" />
+            {user && user.isAdmin ? (
+              <Redirect to="/admin/index" />
+            ) : (
+              <Redirect to="/employee/index" />
+            )}
           </>
         )
       }
