@@ -51,8 +51,7 @@ class AuthPagesLayout extends Component {
                     >
                       <h1 className="text-white">Welcome!</h1>
                       <p className="text-lead text-light">
-                        Some brief description about the app, to be replaced
-                        when i come up with an app name
+                        God's Will Supermarket
                       </p>
                     </motion.div>
                   </Col>

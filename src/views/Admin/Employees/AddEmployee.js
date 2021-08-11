@@ -44,7 +44,7 @@ function AddEmployee() {
 
       if (response.status) {
         if (userType === "Store Employee") {
-          await setStoreList(response.data.stores);
+          await setStoreList(response.data.data);
         } else {
           await setWarehouseList(response.data.warehouses);
         }
@@ -62,6 +62,8 @@ function AddEmployee() {
       [name]: data,
     }));
   };
+
+  console.log(FormInfo);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
